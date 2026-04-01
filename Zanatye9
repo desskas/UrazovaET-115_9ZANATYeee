@@ -1,0 +1,393 @@
+define _CRT_SECURE_NO_WARNINGS  
+#include <iostream>
+#include <cstring>
+#include <iomanip>
+using namespace std;
+enum market_type {
+    PRODUCT,      
+    HOME,          
+    ALL           
+};
+
+enum business_type {
+    MAIN_BUS,    
+    HELP_BUS,     
+    FRANCH        
+};
+struct city {
+    char name[40];
+};
+
+struct market {
+    char name[40];           
+    int pvz;                
+    city gorod;              
+    double stoimost;         
+    market_type tip;        
+    business_type biz;       
+};
+
+const int SIZE = 20;         
+market magaz[SIZE];          
+market domashnie[SIZE];      
+int kol_dom = 0;             
+
+market moskva[SIZE];         
+int kol_mos = 0;             
+void init_list() {
+    int t;   
+    for (t = 0; t < SIZE; t++) {
+        magaz[t].name[0] = '\0';
+        magaz[t].pvz = 0;
+        magaz[t].gorod.name[0] = '\0';
+        magaz[t].stoimost = 0;
+        magaz[t].tip = PRODUCT;
+        magaz[t].biz = MAIN_BUS;
+    }
+
+    strcpy(magaz[0].name, "Ozon");
+    magaz[0].pvz = 15000;
+    strcpy(magaz[0].gorod.name, "Moscow");
+    magaz[0].stoimost = 450.5;
+    magaz[0].tip = ALL;
+    magaz[0].biz = MAIN_BUS;
+
+    strcpy(magaz[1].name, "Wildberries");
+    magaz[1].pvz = 20000;
+    strcpy(magaz[1].gorod.name, "Moscow");
+    magaz[1].stoimost = 520.3;
+    magaz[1].tip = ALL;
+    magaz[1].biz = MAIN_BUS;
+
+    strcpy(magaz[2].name, "Yandex Market");
+    magaz[2].pvz = 8000;
+    strcpy(magaz[2].gorod.name, "Moscow");
+    magaz[2].stoimost = 280.7;
+    magaz[2].tip = ALL;
+    magaz[2].biz = MAIN_BUS;
+
+    strcpy(magaz[3].name, "KazanExpress");
+    magaz[3].pvz = 3500;
+    strcpy(magaz[3].gorod.name, "Kazan");
+    magaz[3].stoimost = 95.2;
+    magaz[3].tip = ALL;
+    magaz[3].biz = MAIN_BUS;
+
+    strcpy(magaz[4].name, "Hoff");
+    magaz[4].pvz = 120;
+    strcpy(magaz[4].gorod.name, "Moscow");
+    magaz[4].stoimost = 85.6;
+    magaz[4].tip = HOME;
+    magaz[4].biz = MAIN_BUS;
+
+    strcpy(magaz[5].name, "IKEA");
+    magaz[5].pvz = 18;
+    strcpy(magaz[5].gorod.name, "Khimki");
+    magaz[5].stoimost = 210.4;
+    magaz[5].tip = HOME;
+    magaz[5].biz = FRANCH;
+
+    strcpy(magaz[6].name, "VkusVill");
+    magaz[6].pvz = 800;
+    strcpy(magaz[6].gorod.name, "Moscow");
+    magaz[6].stoimost = 45.3;
+    magaz[6].tip = PRODUCT;
+    magaz[6].biz = MAIN_BUS;
+
+    strcpy(magaz[7].name, "Magnit");
+    magaz[7].pvz = 15000;
+    strcpy(magaz[7].gorod.name, "Krasnodar");
+    magaz[7].stoimost = 120.8;
+    magaz[7].tip = PRODUCT;
+    magaz[7].biz = MAIN_BUS;
+
+    strcpy(magaz[8].name, "AliExpress");
+    magaz[8].pvz = 5000;
+    strcpy(magaz[8].gorod.name, "Moscow");
+    magaz[8].stoimost = 180.2;
+    magaz[8].tip = ALL;
+    magaz[8].biz = HELP_BUS;
+
+    strcpy(magaz[9].name, "Leroy Merlin");
+    magaz[9].pvz = 120;
+    strcpy(magaz[9].gorod.name, "Saint Petersburg");
+    magaz[9].stoimost = 95.5;
+    magaz[9].tip = HOME;
+    magaz[9].biz = MAIN_BUS;
+
+    strcpy(magaz[10].name, "Domovoy");
+    magaz[10].pvz = 45;
+    strcpy(magaz[10].gorod.name, "Novosibirsk");
+    magaz[10].stoimost = 12.3;
+    magaz[10].tip = HOME;
+    magaz[10].biz = FRANCH;
+
+    strcpy(magaz[11].name, "SberMegaMarket");
+    magaz[11].pvz = 3000;
+    strcpy(magaz[11].gorod.name, "Moscow");
+    magaz[11].stoimost = 150.0;
+    magaz[11].tip = ALL;
+    magaz[11].biz = MAIN_BUS;
+
+    strcpy(magaz[12].name, "Lenta");
+    magaz[12].pvz = 250;
+    strcpy(magaz[12].gorod.name, "Ekaterinburg");
+    magaz[12].stoimost = 75.4;
+    magaz[12].tip = PRODUCT;
+    magaz[12].biz = MAIN_BUS;
+
+    strcpy(magaz[13].name, "OBI");
+    magaz[13].pvz = 85;
+    strcpy(magaz[13].gorod.name, "Rostov-on-Don");
+    magaz[13].stoimost = 52.1;
+    magaz[13].tip = HOME;
+    magaz[13].biz = FRANCH;
+
+    strcpy(magaz[14].name, "Lamoda");
+    magaz[14].pvz = 2000;
+    strcpy(magaz[14].gorod.name, "Moscow");
+    magaz[14].stoimost = 98.7;
+    magaz[14].tip = ALL;
+    magaz[14].biz = HELP_BUS;
+
+    strcpy(magaz[15].name, "Pyaterochka");
+    magaz[15].pvz = 18000;
+    strcpy(magaz[15].gorod.name, "Nizhny Novgorod");
+    magaz[15].stoimost = 110.2;
+    magaz[15].tip = PRODUCT;
+    magaz[15].biz = MAIN_BUS;
+
+    strcpy(magaz[16].name, "Mebel City");
+    magaz[16].pvz = 30;
+    strcpy(magaz[16].gorod.name, "Samara");
+    magaz[16].stoimost = 18.5;
+    magaz[16].tip = HOME;
+    magaz[16].biz = HELP_BUS;
+
+    strcpy(magaz[17].name, "Avito");
+    magaz[17].pvz = 0;
+    strcpy(magaz[17].gorod.name, "Moscow");
+    magaz[17].stoimost = 320.0;
+    magaz[17].tip = ALL;
+    magaz[17].biz = MAIN_BUS;
+
+    strcpy(magaz[18].name, "Stolplit");
+    magaz[18].pvz = 25;
+    strcpy(magaz[18].gorod.name, "Ufa");
+    magaz[18].stoimost = 8.9;
+    magaz[18].tip = HOME;
+    magaz[18].biz = FRANCH;
+
+    strcpy(magaz[19].name, "Goods");
+    magaz[19].pvz = 150;
+    strcpy(magaz[19].gorod.name, "Moscow");
+    magaz[19].stoimost = 25.0;
+    magaz[19].tip = ALL;
+    magaz[19].biz = HELP_BUS;
+}
+
+void display_one(market temp) {
+    cout << temp.name << '\n';
+    cout << "ПВЗ: " << temp.pvz << '\n';
+    cout << "Город: " << temp.gorod.name << '\n';
+    cout << "Стоимость: $" << temp.stoimost << '\n';
+    if (temp.tip == PRODUCT)
+    cout << "Тип: продуктовый\n";
+    else if (temp.tip == HOME)
+        cout << "Тип: товары для дома\n";
+    else
+        cout << "Тип: все-подряд\n";
+    if (temp.biz == MAIN_BUS)
+        cout << "Бизнес: основной\n";
+    else if (temp.biz == HELP_BUS)
+        cout << "Бизнес: вспомогательный\n";
+    else
+        cout << "Бизнес: франшиза\n";
+
+    cout << '\n';
+}
+
+void display_all(market arr[], int kol) {
+    int t;
+    for (t = 0; t < kol; t++) {
+        if (arr[t].name[0] != '\0') {    
+            display_one(arr[t]);
+        }
+    }
+}
+
+void filter_home() {
+    int i;
+    kol_dom = 0;
+    for (i = 0; i < SIZE; i++) {
+        if (magaz[i].name[0] != '\0' && magaz[i].tip == HOME) {
+            domashnie[kol_dom] = magaz[i];   
+            kol_dom++;
+        }
+    }
+}
+
+void bubble_sort(market arr[], int kol) {
+    int i, j;
+    market temp;
+
+    for (i = 0; i < kol - 1; i++) {
+        for (j = 0; j < kol - i - 1; j++) {
+            if (arr[j].stoimost > arr[j + 1].stoimost) {
+                temp = arr[j];           
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void filter_moscow() {
+    int i;
+    kol_mos = 0;
+    for (i = 0; i < SIZE; i++) {
+        if (magaz[i].name[0] != '\0') {
+            if (strcmp(magaz[i].gorod.name, "Moscow") == 0) {  
+                moskva[kol_mos] = magaz[i];
+                kol_mos++;
+            }
+        }
+    }
+}
+
+void update() {
+    int i;
+    char name[80];
+
+    cout << "\nВведите название маркетплейса: ";
+    cin >> name;
+
+    for (i = 0; i < SIZE; i++) {
+        if (strcmp(name, magaz[i].name) == 0)  
+            break;
+    }
+
+    if (i == SIZE) {
+        cout << "Товар не найден.\n";
+        return;
+    }
+
+    cout << "Введите новую информацию.\n";
+    cout << "Название: ";
+    cin >> magaz[i].name;
+    cout << "ПВЗ: ";
+    cin >> magaz[i].pvz;
+    cout << "Город: ";
+    cin >> magaz[i].gorod.name;
+    cout << "Стоимость: ";
+    cin >> magaz[i].stoimost;
+
+    int tip_choice;
+    cout << "Тип (0-продуктовый, 1-товары для дома, 2-все-подряд): ";
+    cin >> tip_choice;
+    magaz[i].tip = (market_type)tip_choice;
+
+    int biz_choice;
+    cout << "Бизнес (0-основной, 1-вспомогательный, 2-франшиза): ";
+    cin >> biz_choice;
+    magaz[i].biz = (business_type)biz_choice;
+
+    cout << "Данные обновлены!\n";
+}
+
+void two_from_city() {
+    int i, j, k;
+    char cities[SIZE][40];
+    int kol_cities = 0;
+      for (i = 0; i < SIZE; i++) {
+        if (magaz[i].name[0] != '\0') {
+            if (strcmp(magaz[i].gorod.name, "Moscow") != 0) {
+                int found = 0;
+                for (j = 0; j < kol_cities; j++) {
+                    if (strcmp(cities[j], magaz[i].gorod.name) == 0) {
+                        found = 1;
+                        break;
+                    }
+                }
+                if (!found) {
+                    strcpy(cities[kol_cities], magaz[i].gorod.name);
+                    kol_cities++;
+                }
+            }
+        }
+    }
+    for (i = 0; i < kol_cities; i++) {
+        market city_arr[SIZE];
+        int kol_city = 0;
+        for (j = 0; j < SIZE; j++) {
+            if (magaz[j].name[0] != '\0') {
+                if (strcmp(magaz[j].gorod.name, cities[i]) == 0) {
+                    city_arr[kol_city] = magaz[j];
+                    kol_city++;
+                }
+            }
+        }
+
+        bubble_sort(city_arr, kol_city);
+        if (kol_city >= 2) {
+            cout << "\nГород: " << cities[i] << "\n";
+            cout << "1. " << city_arr[kol_city - 1].name
+                << " - $" << city_arr[kol_city - 1].stoimost << "\n";
+            cout << "2. " << city_arr[kol_city - 2].name
+                << " - $" << city_arr[kol_city - 2].stoimost << "\n";
+        }
+    }
+}
+
+void show_filtered() {
+    filter_home();
+    bubble_sort(domashnie, kol_dom);
+    cout << "\nТовары для дома отсортированные \n";
+    display_all(domashnie, kol_dom);
+    filter_moscow();
+    cout << "\nМаркетплейсы Москвы\n";
+    display_all(moskva, kol_mos);
+    two_from_city();
+}
+
+char menu() {
+    char ch;
+    cout << '\n';
+    cout << "1 - вывести товары для дома\n";
+    cout << "2 - вывести все маркетплейсы\n";
+    cout << "3 - изменить данные\n";
+    cout << "4 - вывести отфильтрованные данные\n";
+    cout << "0 - выход\n\n";
+    cout << "Выберите команду: ";
+    cin >> ch;
+    return tolower(ch);
+}
+
+int main() {
+    init_list();                   
+    setlocale(LC_ALL, "Russian");
+    char choice;
+    for (;;) {
+        choice = menu();
+        switch (choice) {
+        case '1':
+            filter_home();
+            bubble_sort(domashnie, kol_dom);
+            cout << "\nМаркетплейсы с товарами для дома\n";
+            display_all(domashnie, kol_dom);
+            break;
+        case '2':
+            cout << "\nВсе маркетплейсы\n";
+            display_all(magaz, SIZE);
+            break;
+        case '3':
+            update();          
+            break;
+        case '4':
+            show_filtered();
+            break;
+        case '0':
+            return 0;          
+        }
+    }
+}
